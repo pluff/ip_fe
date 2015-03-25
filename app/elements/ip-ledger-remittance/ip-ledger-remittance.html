@@ -5,7 +5,8 @@
     <link rel="stylesheet" href="ip-ledger-remittance.css">
     <ip-confirmation-overlay id="deleteConfirmationOverlay"
                              on-ip-confirmation-overlay-confirmed="{{doDelete}}"></ip-confirmation-overlay>
-    <core-ajax id="xhrDelete" url="{{remittance.url}}" method="DELETE"></core-ajax>
+    <core-ajax id="xhrDelete" url="{{remittance.url}}" method="DELETE"
+               on-core-response="{{handleDeleteResponse}}"></core-ajax>
 
     <div class="remittance">
       <core-tooltip position="right" large>

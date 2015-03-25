@@ -5,7 +5,8 @@
     <link rel="stylesheet" href="ip-ledger-exchange.css">
     <ip-confirmation-overlay id="deleteConfirmationOverlay"
                              on-ip-confirmation-overlay-confirmed="{{doDelete}}"></ip-confirmation-overlay>
-    <core-ajax id="xhrDelete" url="{{exchange.url}}" method="DELETE"></core-ajax>
+    <core-ajax id="xhrDelete" url="{{exchange.url}}" method="DELETE"
+               on-core-response="{{handleDeleteResponse}}"></core-ajax>
 
     <div class="exchange">
       <core-tooltip position="right" large>
@@ -15,7 +16,7 @@
         <i class="icon-delete" on-click="{{confirmDelete}}">Delete</i>
         </div>
         <div tip>
-          Обмен {{exchange.amount}} {{exchange.from_currency}} в {{exchange.to_currency}}.<br>
+          Обмен {{exchange.amount}} {{exchange.from_currency}} {{exchange.transferred_at}}.<br>
           Курс обмена: {{exchange.exchange_rate}}<br>
           Оффициальный курс на день обмена: {{exchange.taxes.official_rate}}<br>
           Налоговая база: {{exchange.taxes.tax_base}}<br>

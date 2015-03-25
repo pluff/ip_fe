@@ -15,7 +15,7 @@
       </template>
       <div style="clear:both;"></div>
       <h2>Итого налогов:</h2>
-      <template repeat="{{tax in taxes()}}">
+      <template repeat="{{tax in taxes}}">
         <div>По ставке {{tax.tax_rate*100}}% по налоговой базе {{tax.tax_base}} к уплате {{tax.tax_amount}}</div>
       </template>
     </template>

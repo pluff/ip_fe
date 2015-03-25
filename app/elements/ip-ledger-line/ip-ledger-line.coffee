@@ -1,6 +1,9 @@
 
 Polymer(
-  taxes: ->
+  ledgerChanged: -> @recalcTaxes()
+  taxes: []
+
+  recalcTaxes: ->
     result = {}
     if @ledger
       @ledger.remittances.forEach (remittance, index)->
@@ -20,7 +23,8 @@ Polymer(
     _.forEach result, (value, key) ->
       result_array.push _.merge(value, {tax_rate: key})
 
-    result_array
+    @taxes = result_array
+
 
 
 )
