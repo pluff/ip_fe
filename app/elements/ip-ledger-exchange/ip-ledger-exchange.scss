@@ -1,0 +1,19 @@
+@import "app/styles/functions/compass_compact";
+@import "bower_components/compass-mixins/lib/compass";
+
+:host {
+  display: block;
+}
+
+.exchange {
+  float:left;
+  margin: 10px;
+}
+
+.exchange-box {
+  @include box-shadow(gray 2px 2px 10px);
+  @include border-radius(4px);
+  background-color: #cccccc;
+  padding: 10px;
+}
+

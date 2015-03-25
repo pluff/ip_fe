@@ -1,0 +1,16 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="ip-ledger" attributes="token">
+  <template>
+    <link rel="stylesheet" href="ip-ledger.css">
+    <core-ajax
+      id="xhrLoadLedger"
+      auto
+      url="/api/v1/ledgers/{{token}}/"
+      handleAs="json"
+      on-core-response="{{handleLedgerResponse}}"></core-ajax>
+
+    <ip-ledger-line ledger="{{ledger}}"></ip-ledger-line>
+  </template>
+  <script src="../../scripts/elements/ip-ledger.js"></script>
+</polymer-element>

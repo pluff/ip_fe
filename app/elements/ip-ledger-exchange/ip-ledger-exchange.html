@@ -1,0 +1,27 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="ip-ledger-exchange" attributes="exchange">
+  <template>
+    <link rel="stylesheet" href="ip-ledger-exchange.css">
+
+    <div class="exchange">
+      <core-tooltip position="right" large>
+        <div class="exchange-box">{{exchange.amount}} {{exchange.from_currency}}</div>
+        <div tip>
+          Обмен {{exchange.amount}} {{exchange.from_currency}} в {{exchange.to_currency}}.<br>
+          Курс обмена: {{exchange.exchange_rate}}<br>
+          Оффициальный курс на день обмена: {{exchange.taxes.official_rate}}<br>
+          Налоговая база: {{exchange.taxes.tax_base}}<br>
+          Налоговая ставка: {{exchange.taxes.tax_rate*100}}%<br>
+          Налогов к уплате: {{exchange.taxes.tax_amount}}
+        </div>
+      </core-tooltip>
+    </div>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+      });
+    })();
+  </script>
+</polymer-element>
