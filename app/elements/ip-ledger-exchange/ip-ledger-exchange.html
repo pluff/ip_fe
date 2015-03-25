@@ -3,10 +3,17 @@
 <polymer-element name="ip-ledger-exchange" attributes="exchange">
   <template>
     <link rel="stylesheet" href="ip-ledger-exchange.css">
+    <ip-confirmation-overlay id="deleteConfirmationOverlay"
+                             on-ip-confirmation-overlay-confirmed="{{doDelete}}"></ip-confirmation-overlay>
+    <core-ajax id="xhrDelete" url="{{exchange.url}}" method="DELETE"></core-ajax>
 
     <div class="exchange">
       <core-tooltip position="right" large>
-        <div class="exchange-box">{{exchange.amount}} {{exchange.from_currency}}</div>
+        <div class="exchange-box">
+          {{exchange.amount}} {{exchange.from_currency}}
+        <i class="icon-edit">Edit</i>
+        <i class="icon-delete" on-click="{{confirmDelete}}">Delete</i>
+        </div>
         <div tip>
           Обмен {{exchange.amount}} {{exchange.from_currency}} в {{exchange.to_currency}}.<br>
           Курс обмена: {{exchange.exchange_rate}}<br>
@@ -18,10 +25,5 @@
       </core-tooltip>
     </div>
   </template>
-  <script>
-    (function () {
-      Polymer({
-      });
-    })();
-  </script>
+  <script src="ip-ledger-exchange.js"></script>
 </polymer-element>

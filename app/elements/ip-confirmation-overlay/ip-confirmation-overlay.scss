@@ -1,0 +1,29 @@
+@import "app/styles/functions/compass_compact";
+@import "bower_components/compass-mixins/lib/compass";
+
+:host {
+  display: block;
+}
+
+.button-confirm {
+  @include border-radius(4px);
+  padding: 5px;
+  background-color: #aa0000;
+}
+
+.button-cancel {
+  @include border-radius(4px);
+  padding: 5px;
+  background-color: #aaaaaa;
+}
+
+.confirmation-box {
+  @include border-radius(4px);
+  padding: 10px;
+  background-color: #fff;
+
+  .footer {
+    padding-top: 5px;
+    border-top: 1px solid #333;
+  }
+}
