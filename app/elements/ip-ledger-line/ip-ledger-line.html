@@ -4,12 +4,12 @@
   <template>
     <link rel="stylesheet" href="ip-ledger-line.css">
     <template if="{{ledger}}">
-      <h2>Входящие переводы</h2>
+      <h2>Входящие переводы <i class="fa fa-plus-circle add" on-click="{{openRemittanceForm}}"></i></h2>
       <template repeat="{{remittance in ledger.remittances}}">
         <ip-ledger-remittance remittance="{{remittance}}"></ip-ledger-remittance>
       </template>
       <div style="clear:both;"></div>
-      <h2>Обмены валют</h2>
+      <h2>Обмены валют <i class="fa fa-plus-circle add" on-click="{{openExchangeForm}}"></i></h2>
       <template repeat="{{exchange in ledger.exchanges}}">
         <ip-ledger-exchange exchange="{{exchange}}"></ip-ledger-exchange>
       </template>
@@ -19,6 +19,8 @@
         <div>По ставке {{tax.tax_rate*100}}% по налоговой базе {{tax.tax_base}} к уплате {{tax.tax_amount}}</div>
       </template>
     </template>
+    <ip-ledger-remittance-form id="remittanceForm" ledger="{{ledger}}"></ip-ledger-remittance-form>
+    <ip-ledger-exchange-form id="exchangeForm" ledger="{{ledger}}"></ip-ledger-exchange-form>
   </template>
   <script src="../../../bower_components/lodash/lodash.js"></script>
   <script src="ip-ledger-line.js"></script>

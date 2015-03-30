@@ -1,4 +1,13 @@
+@import "styles/framework";
+
 :host {
   display: block;
   margin: 0 50px;
+}
+
+.ledger-canvas {
+  @include box-shadow(#fafafa 2px 2px 2px);
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin: 10px;
 }

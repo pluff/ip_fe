@@ -1,7 +1,9 @@
-
 Polymer(
   ledgerChanged: -> @recalcTaxes()
   taxes: []
+
+  openRemittanceForm: -> @$.remittanceForm.open()
+  openExchangeForm: -> @$.exchangeForm.open()
 
   recalcTaxes: ->
     result = {}
@@ -24,7 +26,4 @@ Polymer(
       result_array.push _.merge(value, {tax_rate: key})
 
     @taxes = result_array
-
-
-
 )

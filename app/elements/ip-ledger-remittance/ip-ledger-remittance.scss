@@ -1,5 +1,5 @@
-@import "app/styles/functions/compass_compact";
-@import "bower_components/compass-mixins/lib/compass";
+@import "styles/framework";
+@import "components-font-awesome/scss/font-awesome";
 
 :host {
   display: block;
@@ -15,4 +15,9 @@
   @include border-radius(4px);
   background-color: #cccccc;
   padding: 10px;
+}
+
+i.delete {
+  cursor: pointer;
+  color: #aa0000;
 }

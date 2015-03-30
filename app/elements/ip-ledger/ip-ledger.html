@@ -10,7 +10,9 @@
       handleAs="json"
       on-core-response="{{handleLedgerResponse}}"></core-ajax>
 
-    <ip-ledger-line on-ip-ledger-changed="{{reload}}" ledger="{{ledger}}"></ip-ledger-line>
+    <div class="ledger-canvas">
+      <ip-ledger-line on-ip-ledger-changed="{{reload}}" ledger="{{ledger}}"></ip-ledger-line>
+    </div>
   </template>
   <script src="ip-ledger.js"></script>
 </polymer-element>

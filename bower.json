@@ -6,7 +6,8 @@
     "polymer": "Polymer/polymer#^0.5.4",
     "app-router": "~2.6.0",
     "compass-mixins": "~1.0.2",
-    "lodash": "~3.5.0"
+    "lodash": "~3.5.0",
+    "polymer-filters": "~0.2.1"
   },
   "devDependencies": {}
 }

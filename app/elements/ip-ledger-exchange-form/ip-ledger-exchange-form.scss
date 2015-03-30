@@ -4,23 +4,27 @@
   display: block;
 }
 
-.button-confirm {
-  @include button-base;
-  background-color: #aa0000;
-}
-
-.button-cancel {
-  @include button-base;
-  background-color: #aaaaaa;
-}
-
-.confirmation-box {
+.form-box {
   @include border-radius(4px);
   padding: 10px;
   background-color: #fff;
 
+
+  span {
+    color: #999999;
+
+    &.core-selected {
+      color: #333333;
+    }
+  }
+
+
   .footer {
     padding-top: 5px;
     border-top: 1px solid #333;
+  }
+  .button-save {
+    @include button-base;
+    background-color: #00aa00;
   }
 }

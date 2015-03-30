@@ -1,3 +1,12 @@
+@import "styles/framework";
+
 :host {
   display: block;
 }
+
+i.add {
+  cursor: pointer;
+  color: #00aa00;
+}
+
+

@@ -11,9 +11,15 @@
     <div class="exchange">
       <core-tooltip position="right" large>
         <div class="exchange-box">
-          {{exchange.amount}} {{exchange.from_currency}}
-        <i class="icon-edit">Edit</i>
-        <i class="icon-delete" on-click="{{confirmDelete}}">Delete</i>
+          {{exchange.transferred_at | date('dd-MM') }} |
+          <template if="{{exchange.from_currency == 'USD'}}">
+            <i class="fa fa-dollar"></i>
+          </template>
+          <template if="{{exchange.from_currency == 'EUR'}}">
+            <i class="fa fa-eur"></i>
+          </template>
+          {{exchange.amount}}
+        <i class="fa fa-times delete" on-click="{{confirmDelete}}"></i>
         </div>
         <div tip>
           Обмен {{exchange.amount}} {{exchange.from_currency}} {{exchange.transferred_at}}.<br>

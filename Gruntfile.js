@@ -23,34 +23,29 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/*.html',
           '<%= yeoman.app %>/elements/{,*/}*.html',
           '{.tmp,<%= yeoman.app %>}/elements/{,*/}*.{css,js}',
-          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       },
-      js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['jshint']
-      },
-      styles: {
-        files: [
-          '<%= yeoman.app %>/styles/{,*/}*.css',
-          '<%= yeoman.app %>/elements/{,*/}*.css'
-        ],
-        tasks: ['copy:styles', 'autoprefixer:server']
+      dev: {
+        files: ['<%=yeoman.app%>/**/*.{html,css}'],
+        tasks: ['copy:dev']
       },
       sass: {
         files: [
-          '<%= yeoman.app %>/styles/{,*/}*.{scss,sass}',
           '<%= yeoman.app %>/elements/{,*/}*.{scss,sass}'
         ],
         tasks: ['sass:server', 'autoprefixer:server']
+      },
+      coffee: {
+        files: ['<%=yeoman.app %>/elements/{,*/}*.coffee'],
+        tasks: ['coffee:dist']
       }
     },
     // Compiles Sass to CSS and generates necessary files if requested
     sass: {
       options: {
-        loadPath: 'bower_components'
+        loadPath: ['bower_components', '<%= yeoman.app %>']
       },
       dist: {
         options: {
@@ -59,7 +54,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>',
-          src: ['styles/{,*/}*.{scss,sass}', 'elements/{,*/}*.{scss,sass}'],
+          src: ['elements/{,*/}*.{scss,sass}'],
           dest: '<%= yeoman.dist %>',
           ext: '.css'
         }]
@@ -68,7 +63,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>',
-          src: ['styles/{,*/}*.{scss,sass}', 'elements/{,*/}*.{scss,sass}'],
+          src: ['elements/{,*/}*.{scss,sass}'],
           dest: '.tmp',
           ext: '.css'
         }]
@@ -85,16 +80,16 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%= yeoman.app %>',
           src: '**/*.coffee',
-          dest: '.tmp',
+          dest: '<%= yeoman.dist %>',
           ext: '.js'
         }]
       },
-      test: {
+      server: {
         files: [{
           expand: true,
-          cwd: 'test/spec',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/spec',
+          cwd: '<%= yeoman.app %>',
+          src: '**/*.coffee',
+          dest: '.tmp',
           ext: '.js'
         }]
       }
@@ -158,6 +153,7 @@ module.exports = function (grunt) {
       dist: ['.tmp', '<%= yeoman.dist %>/*'],
       server: '.tmp'
     },
+    //TODO: Replace it with coffeelint
     jshint: {
       options: {
         jshintrc: '.jshintrc',
@@ -177,7 +173,8 @@ module.exports = function (grunt) {
     },
     usemin: {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
-      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+      css: ['<%= yeoman.dist %>/elements/{,*/}*.css'],
+      js: ['<%= yeoman.dist %>/elements/{,*/}*.js'],
       options: {
         dirs: ['<%= yeoman.dist %>']
       }
@@ -246,6 +243,7 @@ module.exports = function (grunt) {
             '*.html',
             'elements/**',
             '!elements/**/*.scss',
+            '!elements/**/*.coffee',
             'images/{,*/}*.{webp,gif}'
           ]
         }, {
@@ -255,20 +253,12 @@ module.exports = function (grunt) {
           src: ['bower_components/**']
         }]
       },
-      styles: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>',
-          dest: '.tmp',
-          src: ['{styles,elements}/{,*/}*.css']
-        }]
-      },
       dev: {
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>',
           dest: '.tmp',
-          src: ['{styles,elements}/{,*/}*.html']
+          src: ['elements/{,*/}*.{html,css}']
         }]
       }
     },
@@ -306,9 +296,8 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'coffee:dist',
+      'coffee:server',
       'sass:server',
-      'copy:styles',
       'copy:dev',
       'autoprefixer:server',
       'browserSync:app',
@@ -321,8 +310,8 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'coffee:dist',
-    'sass',
-    'copy',
+    'sass:dist',
+    'copy:dist',
     'useminPrepare',
     'imagemin',
     'concat',
