@@ -1,0 +1,19 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="ip-greetings" attributes="">
+  <template>
+    <link rel="stylesheet" href="ip-greetings.css">
+    <div class="greetings-box">
+      <div>Блаблабла текст</div>
+      <div><button class="button-new" on-click="{{createLedger}}">Создать новую книгу</button></div>
+    </div>
+
+    <core-ajax
+      id="xhrCreateLedger"
+      url="/api/v1/ledgers/"
+      method="POST"
+      handleAs="json"
+      on-core-response="{{handleLedgerResponse}}"></core-ajax>
+  </template>
+  <script src="ip-greetings.js"></script>
+</polymer-element>

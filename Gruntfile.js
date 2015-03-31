@@ -39,7 +39,7 @@ module.exports = function (grunt) {
       },
       coffee: {
         files: ['<%=yeoman.app %>/elements/{,*/}*.coffee'],
-        tasks: ['coffeelint','coffee:dist']
+        tasks: ['coffee:dist']
       }
     },
     // Compiles Sass to CSS and generates necessary files if requested
