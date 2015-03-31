@@ -27,9 +27,9 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       },
-      dev: {
+      server: {
         files: ['<%=yeoman.app%>/**/*.{html,css}'],
-        tasks: ['copy:dev']
+        tasks: ['copy:server']
       },
       sass: {
         files: [
@@ -69,6 +69,27 @@ module.exports = function (grunt) {
         }]
       }
     },
+    autoprefixer: {
+      options: {
+        browsers: ['last 2 versions']
+      },
+      server: {
+        files: [{
+          expand: true,
+          cwd: '.tmp',
+          src: '**/*.css',
+          dest: '.tmp'
+        }]
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.dist %>',
+          src: ['**/*.css', '!bower_components/**/*.css'],
+          dest: '<%= yeoman.dist %>'
+        }]
+      }
+    },
     // Compiles CoffeeScript to JavaScript
     coffee: {
       options: {
@@ -94,76 +115,9 @@ module.exports = function (grunt) {
         }]
       }
     },
-    autoprefixer: {
-      options: {
-        browsers: ['last 2 versions']
-      },
-      server: {
-        files: [{
-          expand: true,
-          cwd: '.tmp',
-          src: '**/*.css',
-          dest: '.tmp'
-        }]
-      },
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.dist %>',
-          src: ['**/*.css', '!bower_components/**/*.css'],
-          dest: '<%= yeoman.dist %>'
-        }]
-      }
-    },
-    browserSync: {
-      options: {
-        notify: false,
-        port: 9000,
-        open: true
-      },
-      app: {
-        options: {
-          watchTask: true,
-          injectChanges: false, // can't inject Shadow DOM
-          server: {
-            baseDir: ['.tmp', '<%= yeoman.app %>'],
-            routes: {
-              '/bower_components': 'bower_components'
-            }
-          }
-        },
-        src: [
-          '.tmp/**/*.{css,html,js}',
-          '<%= yeoman.app %>/**/*.{css,html,js}'
-        ]
-      },
-      dist: {
-        options: {
-          server: {
-            baseDir: 'dist'
-          }
-        },
-        src: [
-          '<%= yeoman.dist %>/**/*.{css,html,js}',
-          '!<%= yeoman.dist %>/bower_components/**/*'
-        ]
-      }
-    },
     clean: {
       dist: ['.tmp', '<%= yeoman.dist %>/*'],
       server: '.tmp'
-    },
-    //TODO: Replace it with coffeelint
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
-      },
-      all: [
-        '<%= yeoman.app %>/scripts/{,*/}*.js',
-        '!<%= yeoman.app %>/scripts/vendor/*',
-        'test/spec/{,*/}*.js'
-      ]
     },
     useminPrepare: {
       html: '<%= yeoman.app %>/index.html',
@@ -253,33 +207,13 @@ module.exports = function (grunt) {
           src: ['bower_components/**']
         }]
       },
-      dev: {
+      server: {
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>',
           dest: '.tmp',
           src: ['elements/{,*/}*.{html,css}']
         }]
-      }
-    },
-    // See this tutorial if you'd like to run PageSpeed
-    // against localhost: http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/
-    pagespeed: {
-      options: {
-        // By default, we use the PageSpeed Insights
-        // free (no API key) tier. You can use a Google
-        // Developer API key if you have one. See
-        // http://goo.gl/RkN0vE for info
-        nokey: true
-      },
-      // Update `url` below to the public URL for your site
-      mobile: {
-        options: {
-          url: "https://developers.google.com/web/fundamentals/",
-          locale: "en_GB",
-          strategy: "mobile",
-          threshold: 80
-        }
       }
     }
   });
@@ -291,16 +225,15 @@ module.exports = function (grunt) {
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'browserSync:dist']);
+      return grunt.task.run(['build']);
     }
 
     grunt.task.run([
       'clean:server',
       'coffee:server',
       'sass:server',
-      'copy:dev',
+      'copy:server',
       'autoprefixer:server',
-      'browserSync:app',
       'watch'
     ]);
   });
@@ -324,7 +257,6 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'jshint',
     // 'test'
     'build'
   ]);
