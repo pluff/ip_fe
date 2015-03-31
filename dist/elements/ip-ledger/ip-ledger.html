@@ -12,6 +12,7 @@
       on-core-response="{{handleLedgerResponse}}"></core-ajax>
 
     <template if="{{ledger}}">
+      <div>Для доступа к этой книге в будущем используйте URI из адресной строки браузера.</div>
       <div class="ledger-canvas">
         <div style="float:right;">
           <button class="button-delete" on-click="{{confirmDelete}}">Удалить книгу</button>
