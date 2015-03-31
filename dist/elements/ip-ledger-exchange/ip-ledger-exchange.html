@@ -1,0 +1,36 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="ip-ledger-exchange" attributes="exchange">
+  <template>
+    <link rel="stylesheet" href="ip-ledger-exchange.css">
+    <ip-confirmation-overlay id="deleteConfirmationOverlay"
+                             on-ip-confirmation-overlay-confirmed="{{doDelete}}"></ip-confirmation-overlay>
+    <core-ajax id="xhrDelete" url="{{exchange.url}}" method="DELETE"
+               on-core-response="{{handleDeleteResponse}}"></core-ajax>
+
+    <div class="exchange">
+      <core-tooltip position="right" large>
+        <div class="exchange-box">
+          {{exchange.transferred_at | date('dd-MM') }} |
+          <template if="{{exchange.from_currency == 'USD'}}">
+            <i class="fa fa-dollar"></i>
+          </template>
+          <template if="{{exchange.from_currency == 'EUR'}}">
+            <i class="fa fa-eur"></i>
+          </template>
+          {{exchange.amount}}
+        <i class="fa fa-times delete" on-click="{{confirmDelete}}"></i>
+        </div>
+        <div tip>
+          Обмен {{exchange.amount}} {{exchange.from_currency}} {{exchange.transferred_at}}.<br>
+          Курс обмена: {{exchange.exchange_rate}}<br>
+          Оффициальный курс на день обмена: {{exchange.taxes.official_rate}}<br>
+          Налоговая база: {{exchange.taxes.tax_base}}<br>
+          Налоговая ставка: {{exchange.taxes.tax_rate*100}}%<br>
+          Налогов к уплате: {{exchange.taxes.tax_amount}}
+        </div>
+      </core-tooltip>
+    </div>
+  </template>
+  <script src="ip-ledger-exchange.js"></script>
+</polymer-element>

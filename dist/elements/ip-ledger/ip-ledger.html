@@ -1,0 +1,29 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="ip-ledger" attributes="token">
+  <template>
+    <link rel="stylesheet" href="ip-ledger.css">
+    <core-ajax
+      id="xhrLoadLedger"
+      auto
+      url="/api/v1/ledgers/{{token}}/"
+      handleAs="json"
+      on-core-error="{{redirectToRoot}}"
+      on-core-response="{{handleLedgerResponse}}"></core-ajax>
+
+    <template if="{{ledger}}">
+      <div class="ledger-canvas">
+        <div style="float:right;">
+          <button class="button-delete" on-click="{{confirmDelete}}">Удалить книгу</button>
+        </div>
+        <div style="clear:both"></div>
+        <ip-ledger-line on-ip-ledger-changed="{{reload}}" ledger="{{ledger}}"></ip-ledger-line>
+      </div>
+    </template>
+    <ip-confirmation-overlay id="deleteConfirmationOverlay"
+                             on-ip-confirmation-overlay-confirmed="{{doDelete}}"></ip-confirmation-overlay>
+    <core-ajax id="xhrDelete" url="{{ledger.url}}" method="DELETE"
+               on-core-response="{{redirectToRoot}}"></core-ajax>
+  </template>
+  <script src="ip-ledger.js"></script>
+</polymer-element>

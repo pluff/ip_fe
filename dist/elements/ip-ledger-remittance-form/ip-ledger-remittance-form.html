@@ -1,0 +1,30 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="ip-ledger-remittance-form" attributes="ledger remittance">
+  <template>
+    <link rel="stylesheet" href="ip-ledger-remittance-form.css">
+    <core-overlay id="overlay" backdrop>
+      <form class="form-box" on-submit="{{save}}">
+        <input is="core-input" placeholder="Дата YYYY-mm-dd" value="{{remittance.transferred_at}}">
+        <input is="core-input" placeholder="Количество" value="{{remittance.amount}}">
+        <core-selector valueattr="value" selected="{{remittance.currency}}">
+          <span value="USD"><i class="fa fa-dollar"></i></span>
+          <span value="EUR"><i class="fa fa-eur"></i></span>
+        </core-selector>
+
+        <div class="footer">
+          <button type="submit" class="button-save">Сохранить</button>
+        </div>
+      </form>
+    </core-overlay>
+    <core-ajax
+      id="xhrSave"
+      url="/api/v1/ledgers/{{ledger.access_token}}/remittances/"
+      params="{{remittance}}"
+      method="POST"
+      handleAs="json"
+      on-core-response="{{handleSaveResponse}}"></core-ajax>
+  </template>
+
+  <script src="ip-ledger-remittance-form.js"></script>
+</polymer-element>

@@ -1,0 +1,35 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="ip-ledger-remittance" attributes="remittance">
+  <template>
+    <link rel="stylesheet" href="ip-ledger-remittance.css">
+    <ip-confirmation-overlay id="deleteConfirmationOverlay"
+                             on-ip-confirmation-overlay-confirmed="{{doDelete}}"></ip-confirmation-overlay>
+    <core-ajax id="xhrDelete" url="{{remittance.url}}" method="DELETE"
+               on-core-response="{{handleDeleteResponse}}"></core-ajax>
+
+    <div class="remittance">
+      <core-tooltip position="right" large>
+        <div class="remittance-box">
+          {{remittance.transferred_at | date('dd-MM') }} |
+          <template if="{{remittance.currency == 'USD'}}">
+            <i class="fa fa-dollar"></i>
+          </template>
+          <template if="{{remittance.currency == 'EUR'}}">
+            <i class="fa fa-eur"></i>
+          </template>
+          {{remittance.amount}}
+          <i class="fa fa-times delete" on-click="{{confirmDelete}}"></i>
+        </div>
+        <div tip>
+          {{remittance.amount}} {{remittance.currency}} получены {{remittance.transferred_at}}.<br>
+          Оффициальный курс на день перевода: {{remittance.taxes.official_rate}}<br>
+          Налоговая база: {{remittance.taxes.tax_base}}<br>
+          Налоговая ставка: {{remittance.taxes.tax_rate*100}}%<br>
+          Налогов к уплате: {{remittance.taxes.tax_amount}}
+        </div>
+      </core-tooltip>
+    </div>
+  </template>
+  <script src="ip-ledger-remittance.js"></script>
+</polymer-element>

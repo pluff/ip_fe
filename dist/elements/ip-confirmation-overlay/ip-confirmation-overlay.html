@@ -1,0 +1,29 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="ip-confirmation-overlay"
+                 attributes="headerText confirmText cancelText">
+  <template>
+    <link rel="stylesheet" href="ip-confirmation-overlay.css">
+    <core-overlay id="overlay" backdrop>
+      <div class="confirmation-box">
+        <template if="{{headerText.length > 0}}">
+          <div class="header">
+            <h3>{{headerText}}</h3>
+          </div>
+        </template>
+        <content></content>
+        <template if="{{confirmText.length > 0 || cancelText.length > 0}}">
+          <div class="footer">
+            <template if="{{confirmText.length > 0}}">
+              <button class="button-confirm" on-click="{{confirm}}">{{confirmText}}</button>
+            </template>
+            <template if="{{cancelText.length > 0}}">
+              <button core-overlay-toggle class="button-cancel">{{cancelText}}</button>
+            </template>
+          </div>
+        </template>
+      </div>
+    </core-overlay>
+  </template>
+  <script src="ip-confirmation-overlay.js"></script>
+</polymer-element>

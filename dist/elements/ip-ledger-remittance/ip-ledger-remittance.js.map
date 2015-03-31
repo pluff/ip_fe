@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "ip-ledger-remittance.js",
+  "sourceRoot": "",
+  "sources": [
+    "ip-ledger-remittance.coffee"
+  ],
+  "names": [],
+  "mappings": "AAAA;AAAA,EAAA,OAAA,CACE;AAAA,IAAA,aAAA,EAAe,SAAA,GAAA;aAAG,IAAC,CAAA,CAAC,CAAC,yBAAyB,CAAC,IAA7B,CAAA,EAAH;IAAA,CAAf;AAAA,IACA,QAAA,EAAU,SAAA,GAAA;aAAG,IAAC,CAAA,CAAC,CAAC,SAAS,CAAC,EAAb,CAAA,EAAH;IAAA,CADV;AAAA,IAGA,oBAAA,EAAsB,SAAA,GAAA;aAAG,IAAC,CAAA,IAAD,CAAM,mBAAN,EAAH;IAAA,CAHtB;GADF,CAAA,CAAA;AAAA"
+}
