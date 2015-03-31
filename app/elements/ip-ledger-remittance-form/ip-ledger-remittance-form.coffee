@@ -7,8 +7,8 @@ Polymer(
   reset: -> @remittance = {currency: 'EUR'}
 
   save: (e) ->
-    e.preventDefault();
-    @$.xhrSave.go();
+    e.preventDefault()
+    @$.xhrSave.go()
 
   handleSaveResponse: (event, response)->
     @fire('ip-ledger-changed')

@@ -39,7 +39,7 @@ module.exports = function (grunt) {
       },
       coffee: {
         files: ['<%=yeoman.app %>/elements/{,*/}*.coffee'],
-        tasks: ['coffee:dist']
+        tasks: ['coffeelint','coffee:dist']
       }
     },
     // Compiles Sass to CSS and generates necessary files if requested
@@ -113,6 +113,14 @@ module.exports = function (grunt) {
           dest: '.tmp',
           ext: '.js'
         }]
+      }
+    },
+    coffeelint: {
+      files: {
+        src: ['<%= yeoman.app %>/**/*.coffee']
+      },
+      options: {
+        configFile: 'coffeelint.json'
       }
     },
     clean: {
@@ -229,6 +237,7 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
+      'coffeelint',
       'clean:server',
       'coffee:server',
       'sass:server',
@@ -241,6 +250,7 @@ module.exports = function (grunt) {
 
 
   grunt.registerTask('build', [
+    'coffeelint',
     'clean:dist',
     'coffee:dist',
     'sass:dist',
