@@ -246,7 +246,6 @@ module.exports = function (grunt) {
     'copy:dist',
     'useminPrepare',
     'concat',
-    'uglify',
     //'vulcanize',
     'usemin',
     //'replace',

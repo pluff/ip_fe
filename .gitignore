@@ -4,4 +4,4 @@ test/temp
 bower_components
 .tmp
 test/bower_components/
-dist/bower_components/
+dist
