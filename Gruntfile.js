@@ -247,9 +247,9 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concat',
     'uglify',
-    'vulcanize',
+    //'vulcanize',
     'usemin',
-    'replace',
+    //'replace',
     'minifyHtml'
   ]);
 
