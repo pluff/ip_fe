@@ -167,16 +167,6 @@ module.exports = function (grunt) {
         }
       }
     },
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg,svg}',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
-    },
     minifyHtml: {
       options: {
         quotes: true,
@@ -250,15 +240,12 @@ module.exports = function (grunt) {
 
 
   grunt.registerTask('build', [
-    'coffeelint',
     'clean:dist',
     'coffee:dist',
     'sass:dist',
     'copy:dist',
     'useminPrepare',
-    'imagemin',
     'concat',
-    'autoprefixer',
     'uglify',
     'vulcanize',
     'usemin',
